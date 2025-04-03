@@ -177,7 +177,9 @@ void BindSolver(py::module& m) {
       .def_readwrite("update_state_every_iteration",
                      &Options::update_state_every_iteration)
       .def_readwrite("inner_iteration_ordering",
-                     &Options::inner_iteration_ordering);
+                     &Options::inner_iteration_ordering)
+      .def_readwrite("linear_solver_ordering",
+                     &Options::linear_solver_ordering);
   MakeDataclass(PyOptions);
 
   using Summary = ceres::Solver::Summary;
