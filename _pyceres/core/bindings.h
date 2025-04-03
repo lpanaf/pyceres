@@ -6,6 +6,7 @@
 #include "_pyceres/core/crs_matrix.h"
 #include "_pyceres/core/loss_functions.h"
 #include "_pyceres/core/manifold.h"
+#include "_pyceres/core/parameter_block_ordering.h"
 #include "_pyceres/core/problem.h"
 #include "_pyceres/core/solver.h"
 #include "_pyceres/core/types.h"
@@ -23,5 +24,6 @@ void BindCore(py::module& m) {
   BindLossFunctions(m);
   BindCostFunctions(m);
   BindManifold(m);
+  BindParameterBlockOrdering(m);
   BindProblem(m);
 }
