@@ -7,6 +7,53 @@
 #include <pybind11/pybind11.h>
 
 namespace py = pybind11;
+using ParameterBlockOrdering = ceres::ParameterBlockOrdering;
+void BindParameterBlockOrdering(py::module& m) {
+  py::class_<ParameterBlockOrdering, std::shared_ptr<ParameterBlockOrdering>> (m, "ParameterBlockOrdering")
+    .def(py::init<>())
+    .def(
+      "clear",
+      &ParameterBlockOrdering::Clear)
+    .def("reverse",
+      &ParameterBlockOrdering::Reverse)
+    .def("num_elements",
+      &ParameterBlockOrdering::NumElements)
+    .def("num_groups",
+      &ParameterBlockOrdering::NumGroups)
+    .def(
+      "add_element_to_group", 
+    [] (ParameterBlockOrdering& self, py::array_t<double>& values, const int group) {
+      py::buffer_info info = values.request();
+      return self.AddElementToGroup((double*)info.ptr, group);
+    },
+    py::arg("values").noconvert(),
+    py::arg("group"))
+    .def(
+      "remove",
+      [] (ParameterBlockOrdering& self, py::array_t<double>& values) {
+        py::buffer_info info = values.request();
+        return self.Remove((double*)info.ptr);
+      },
+      py::arg("values").noconvert())
+    .def("group_id",
+      [] (ParameterBlockOrdering& self, py::array_t<double>& values) {
+        py::buffer_info info = values.request();
+        return self.GroupId((double*)info.ptr);
+      },
+      py::arg("values").noconvert())
+    .def("is_member",
+      [] (ParameterBlockOrdering& self, py::array_t<double>& values) {
+        py::buffer_info info = values.request();
+        return self.IsMember((double*)info.ptr);
+      },
+      py::arg("values").noconvert())
+    .def("group_size",
+      [] (ParameterBlockOrdering& self, const int group) {
+        return self.GroupSize(group);
+      },
+      py::arg("group"));
+
+}
 
 void BindSolver(py::module& m) {
   m.def("solve",
@@ -129,6 +176,8 @@ void BindSolver(py::module& m) {
           &Options::gradient_check_numeric_derivative_relative_step_size)
       .def_readwrite("update_state_every_iteration",
                      &Options::update_state_every_iteration);
+      .def_readwrite(
+          "inner_iteration_ordering", &Options::inner_iteration_ordering)
   MakeDataclass(PyOptions);
 
   using Summary = ceres::Solver::Summary;
