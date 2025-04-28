@@ -69,6 +69,7 @@ void BindTypes(py::module& m) {
           .value("DENSE_SCHUR", ceres::LinearSolverType::DENSE_SCHUR)
           .value("SPARSE_SCHUR", ceres::LinearSolverType::SPARSE_SCHUR)
           .value("ITERATIVE_SCHUR", ceres::LinearSolverType::ITERATIVE_SCHUR)
+          .value("CUDA_SPARSE", ceres::LinearSolverType::CUDA_SPARSE)
           .value("CGNR", ceres::LinearSolverType::CGNR);
   AddStringToEnumConstructor(linsolt);
 
