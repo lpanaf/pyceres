@@ -69,7 +69,6 @@ void BindTypes(py::module& m) {
           .value("DENSE_SCHUR", ceres::LinearSolverType::DENSE_SCHUR)
           .value("SPARSE_SCHUR", ceres::LinearSolverType::SPARSE_SCHUR)
           .value("ITERATIVE_SCHUR", ceres::LinearSolverType::ITERATIVE_SCHUR)
-          .value("CUDA_SPARSE", ceres::LinearSolverType::CUDA_SPARSE)
           .value("CGNR", ceres::LinearSolverType::CGNR);
   AddStringToEnumConstructor(linsolt);
 
@@ -122,8 +121,8 @@ void BindTypes(py::module& m) {
                  ceres::SparseLinearAlgebraLibraryType::EIGEN_SPARSE)
           .value("ACCELERATE_SPARSE",
                  ceres::SparseLinearAlgebraLibraryType::ACCELERATE_SPARSE)
-          //   .value("CUDA_SPARSE",
-          //           ceres::SparseLinearAlgebraLibraryType::CUDA_SPARSE)
+            .value("CUDA_SPARSE",
+                    ceres::SparseLinearAlgebraLibraryType::CUDA_SPARSE)
           .value("NO_SPARSE", ceres::SparseLinearAlgebraLibraryType::NO_SPARSE);
   AddStringToEnumConstructor(slalt);
 
