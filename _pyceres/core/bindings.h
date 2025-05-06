@@ -17,12 +17,12 @@ namespace py = pybind11;
 void BindCore(py::module& m) {
   BindTypes(m);
   BindCallbacks(m);
-  BindCovariance(m);
   BindCRSMatrix(m);
-  BindSolver(m);
   BindLossFunctions(m);
   BindCostFunctions(m);
   BindManifold(m);
   BindParameterBlockOrdering(m);
   BindProblem(m);
+  BindCovariance(m);
+  BindSolver(m);
 }
