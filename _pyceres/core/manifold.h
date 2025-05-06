@@ -76,19 +76,4 @@ void BindManifold(py::module& m) {
   py::class_<ceres::SphereManifold<ceres::DYNAMIC>, ceres::Manifold>(
       m, "SphereManifold")
       .def(py::init<int>());
-
-  // 2-manifold product
-  py::class_<ceres::ProductManifold<ceres::Manifold, ceres::Manifold>, ceres::Manifold, std::shared_ptr<ceres::ProductManifold<ceres::Manifold, ceres::Manifold>>>(
-      m, "ProductManifold2")
-      .def(py::init<
-          std::shared_ptr<ceres::Manifold>,
-          std::shared_ptr<ceres::Manifold>>());
-
-  // 3-manifold product
-  py::class_<ceres::ProductManifold<ceres::Manifold, ceres::Manifold, ceres::Manifold>, ceres::Manifold, std::shared_ptr<ceres::ProductManifold<ceres::Manifold, ceres::Manifold, ceres::Manifold>>>(
-      m, "ProductManifold3")
-      .def(py::init<
-          std::shared_ptr<ceres::Manifold>,
-          std::shared_ptr<ceres::Manifold>,
-          std::shared_ptr<ceres::Manifold>>());
 }
